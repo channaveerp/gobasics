@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
@@ -24,30 +23,33 @@ func main() {
 	fmt.Println("your choice is", choice)
 
 	// check avaibale balance
-	var wantsTocheckBalnce = choice == 1
-	if wantsTocheckBalnce {
-		fmt.Println("Your available Balance is ", avaibelance)
-	}
-	// add money
-	var wantsToAddmoney = choice == 2
-	if wantsToAddmoney {
-		fmt.Scan(&addmoney)
-		fmt.Println("your money added successfulley ", addmoney)
-		fmt.Println("Now Total Available Bance is ", avaibelance+addmoney)
-	}
 
-	//  widra money
-	var wantsTowidrawMoney = choice == 3
-	if wantsTowidrawMoney {
+	if choice == 1 {
+		fmt.Println("Your available Balance is ", avaibelance)
+	} else if choice == 2 {
+		fmt.Scan(&addmoney)
+		if addmoney <= 0 {
+			fmt.Println("Invallid Amount! amount must be greater then 0")
+			return
+		}
+		fmt.Println("your money added successfulley ", addmoney)
+		avaibelance += addmoney
+		fmt.Println("Now Total Available Bance is ", avaibelance)
+	} else if choice == 3 {
 		fmt.Scan(&widraw)
+		if widraw <= 0 {
+			fmt.Println("Invallid Amount! amount must be greater then 0")
+			return
+		}
+
+		if widraw > avaibelance {
+			fmt.Println("Abe sale Garib Utna paisa nahi hi tere pas jitna tu mangrah Hi")
+			return
+		}
 		fmt.Println("Your Widra money is ", widraw)
 		fmt.Println("Now Your Available Bance is ", avaibelance-widraw)
-	}
-	// exit
-	var wantsToExit = choice == 4
-	if wantsToExit {
-		fmt.Println("Your selected choice is", choice)
-		os.Exit(0)
+	} else {
+		fmt.Println("GoodBye!")
 
 	}
 
